@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan — Tasya & Dafit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#071c2c;
+    --deep2:#0c3247;
+    --teal:#136b6b;
+    --aqua:#2fa9a0;
+    --seafoam:#a7ead6;
+    --pearl:#fbf6ec;
+    --coral:#ff9bb0;
+    --gold:#e6c37a;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Quicksand', sans-serif;
+    background:var(--deep);
+    color:var(--pearl);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- background ---------- */
+  .ocean-bg{
+    position:fixed; inset:0; z-index:-3;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(47,169,160,0.35), transparent 55%),
+      radial-gradient(ellipse at 80% 30%, rgba(230,195,122,0.10), transparent 50%),
+      linear-gradient(180deg, var(--deep) 0%, var(--deep2) 45%, #052b3a 100%);
+  }
+  .rays{
+    position:fixed; inset:0; z-index:-2; opacity:0.22;
+    background:repeating-linear-gradient(100deg, transparent 0px, transparent 60px, rgba(255,255,255,0.05) 62px, transparent 140px);
+    animation:sway 14s ease-in-out infinite;
+  }
+  @keyframes sway{
+    0%,100%{ transform:translateX(0) skewX(0deg); }
+    50%{ transform:translateX(-30px) skewX(2deg); }
+  }
+  .bubbles{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+  .bubble{
+    position:absolute; bottom:-10%; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0.05) 70%);
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.4);
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0; }
+    10%{ opacity:0.8; }
+    100%{ transform:translateY(-115vh) translateX(20px); opacity:0; }
+  }
+
+  section{
+    position:relative;
+    padding:110px 24px;
+    max-width:900px;
+    margin:0 auto;
+    text-align:center;
+  }
+
+  .wave-divider{ display:block; width:100%; height:80px; margin-top:-2px; }
+
+  /* ---------- Music Player ---------- */
+  .music-toggle{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:50;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:rgba(7,28,44,0.65);
+    border:1px solid rgba(230,195,122,0.4);
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 18px rgba(0,0,0,0.35);
+    transition:transform 0.3s ease, border-color 0.3s ease;
+  }
+  .music-toggle:hover{ transform:scale(1.06); border-color:var(--gold); }
+  .music-toggle svg{
+    width:22px; height:22px;
+    fill:var(--gold);
+  }
+  .music-toggle.spinning svg{
+    animation:spin 3.2s linear infinite;
+  }
+  @keyframes spin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+  .music-hint{
+    position:fixed;
+    top:78px;
+    right:20px;
+    z-index:50;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.78rem;
+    color:var(--seafoam);
+    background:rgba(7,28,44,0.65);
+    border:1px solid rgba(167,234,214,0.2);
+    padding:6px 12px;
+    border-radius:999px;
+    opacity:0;
+    animation:hintshow 0.6s ease 1s forwards, hinthide 0.6s ease 5s forwards;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  @keyframes hintshow{ to{ opacity:1; } }
+  @keyframes hinthide{ to{ opacity:0; } }
+
+  /* ---------- Cover / Hero ---------- */
+  .cover{
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding-top:60px;
+  }
+  .eyebrow{
+    font-size:0.78rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--seafoam); opacity:0.85; margin-bottom:20px;
+  }
+  .tail-mark{
+    width:100px; height:auto; opacity:0.9; margin-bottom:28px;
+    filter:drop-shadow(0 0 18px rgba(47,169,160,0.5));
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-14px) rotate(-4deg); }
+  }
+  .couple-names{
+    font-family:'Tangerine', cursive;
+    font-size:clamp(3.4rem, 11vw, 6rem);
+    line-height:1.05;
+    background:linear-gradient(90deg, var(--gold), var(--coral) 45%, var(--seafoam) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 25px rgba(230,195,122,0.25));
+  }
+  .amp{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.3rem, 3vw, 1.8rem);
+    color:var(--seafoam);
+    margin:6px 0;
+    opacity:0.8;
+  }
+  .cover-date{
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(1.1rem, 2.6vw, 1.4rem);
+    letter-spacing:0.05em;
+    color:var(--pearl);
+    opacity:0.9;
+    margin-top:26px;
+  }
+  .scroll-hint{
+    margin-top:56px; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--seafoam); opacity:0.6; animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); opacity:0.4;}
+    50%{ transform:translateY(8px); opacity:0.9;}
+  }
+
+  /* ---------- Opening quote ---------- */
+  .quote-text{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.05rem, 2.3vw, 1.3rem);
+    line-height:1.9;
+    color:var(--pearl);
+    opacity:0.92;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .quote-source{
+    display:block;
+    margin-top:16px;
+    font-family:'Quicksand', sans-serif;
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+    color:var(--gold);
+    opacity:0.85;
+  }
+
+  /* ---------- Mempelai (bride & groom) ---------- */
+  .section-heading{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.5rem, 3.8vw, 2.2rem);
+    color:var(--seafoam);
+    margin-bottom:50px;
+  }
+  .couples{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:40px;
+  }
+  .couple-card{
+    flex:1 1 260px;
+    max-width:320px;
+    background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    border:1px solid rgba(167,234,214,0.18);
+    border-radius:20px 4px 20px 4px;
+    padding:36px 26px;
+  }
+  .couple-icon{ font-size:1.8rem; margin-bottom:14px; }
+  .couple-card h3{
+    font-family:'Tangerine', cursive;
+    font-size:2.6rem;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .couple-card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1rem;
+    line-height:1.6;
+    color:var(--pearl);
+    opacity:0.85;
+  }
+  .and-divider{
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Tangerine', cursive; font-size:2.4rem; color:var(--coral);
+    padding:0 6px;
+  }
+
+  /* ---------- Countdown ---------- */
+  .countdown{
+    display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:40px;
+  }
+  .cd-box{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(230,195,122,0.3);
+    border-radius:12px;
+    padding:18px 22px;
+    min-width:80px;
+  }
+  .cd-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:2rem;
+    color:var(--gold);
+    display:block;
+  }
+  .cd-label{
+    font-size:0.68rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--seafoam);
+    opacity:0.8;
+  }
+
+  /* ---------- Events ---------- */
+  .events{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:28px;
+  }
+  .event-card{
+    flex:1 1 300px;
+    max-width:380px;
+    background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    border:1px solid rgba(167,234,214,0.18);
+    border-radius:4px 20px 4px 20px;
+    padding:34px 28px;
+    text-align:left;
+  }
+  .event-card .icon{ font-size:1.6rem; margin-bottom:12px; display:block; }
+  .event-card h3{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .event-card p{
+    font-size:0.95rem;
+    line-height:1.75;
+    color:var(--pearl);
+    opacity:0.88;
+    margin-bottom:6px;
+  }
+  .event-card .label{
+    color:var(--seafoam);
+    opacity:0.7;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    display:block;
+    margin-top:14px;
+    margin-bottom:2px;
+  }
+  .map-link{
+    display:inline-block;
+    margin-top:16px;
+    font-size:0.82rem;
+    color:var(--coral);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,155,176,0.5);
+    padding-bottom:2px;
+    transition:opacity 0.3s ease;
+  }
+  .map-link:hover{ opacity:0.7; }
+
+  /* ---------- Gift / Amplop digital ---------- */
+  .gift-box{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(230,195,122,0.2);
+    border-radius:16px;
+    padding:36px 30px;
+    max-width:520px;
+    margin:0 auto;
+  }
+  .gift-box p{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    line-height:1.8;
+    color:var(--pearl);
+    opacity:0.9;
+    margin-bottom:22px;
+  }
+  .gift-detail{
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(255,255,255,0.04);
+    border-radius:10px;
+    padding:14px 18px;
+    margin-bottom:10px;
+    font-size:0.9rem;
+  }
+  .gift-detail span:first-child{ color:var(--seafoam); opacity:0.85; }
+  .gift-detail span:last-child{ color:var(--gold); font-weight:600; letter-spacing:0.03em; }
+  .copy-btn{
+    background:none;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-family:'Quicksand', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:5px 12px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+  }
+  .copy-btn:hover{ background:var(--gold); color:var(--deep); }
+
+  /* ---------- RSVP ---------- */
+  .rsvp-form{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    max-width:440px;
+    margin:0 auto;
+    text-align:left;
+  }
+  .rsvp-form label{
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--seafoam);
+    opacity:0.8;
+    margin-bottom:6px;
+    display:block;
+  }
+  .rsvp-form input,
+  .rsvp-form select,
+  .rsvp-form textarea{
+    width:100%;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(167,234,214,0.25);
+    border-radius:8px;
+    padding:12px 14px;
+    color:var(--pearl);
+    font-family:'Quicksand', sans-serif;
+    font-size:0.92rem;
+  }
+  .rsvp-form textarea{ resize:vertical; min-height:80px; }
+  .rsvp-form input:focus,
+  .rsvp-form select:focus,
+  .rsvp-form textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+  .rsvp-submit{
+    margin-top:8px;
+    background:linear-gradient(90deg, var(--gold), var(--coral));
+    border:none;
+    color:var(--deep);
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    font-size:0.85rem;
+    padding:14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:transform 0.3s ease;
+  }
+  .rsvp-submit:hover{ transform:translateY(-2px); }
+  .rsvp-note{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--seafoam);
+    opacity:0.75;
+    text-align:center;
+    margin-top:14px;
+    min-height:1.2em;
+  }
+
+  /* ---------- Closing ---------- */
+  .closing-text{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.05rem, 2.3vw, 1.3rem);
+    line-height:1.9;
+    color:var(--pearl);
+    opacity:0.92;
+    max-width:600px;
+    margin:0 auto 20px;
+  }
+  .closing-names{
+    font-family:'Tangerine', cursive;
+    font-size:2.6rem;
+    color:var(--gold);
+    margin-top:18px;
+  }
+
+  footer{
+    text-align:center;
+    padding:50px 24px 90px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--seafoam);
+    opacity:0.6;
+    font-size:0.85rem;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ocean-bg"></div>
+<div class="rays"></div>
+<div class="bubbles" id="bubbles"></div>
+
+<!-- MUSIC PLAYER -->
+<audio id="bgMusic" loop preload="none">
+  <!-- Ganti "musik.mp3" dengan nama file lagu pilihan Anda, taruh di folder yang sama dengan file HTML ini -->
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+<div class="music-toggle" id="musicToggle" title="Putar / jeda musik">
+  <svg id="musicIcon" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</div>
+<div class="music-hint">tekan untuk memutar musik 🎵</div>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="eyebrow">The Wedding Of</div>
+  <svg class="tail-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 8 C 35 20, 20 35, 22 55 C 23 68, 32 76, 40 80 C 34 70, 33 60, 38 52 C 42 60, 50 66, 60 66 C 56 58, 58 48, 66 44 C 74 40, 82 44, 88 52 C 84 34, 68 18, 50 8 Z" fill="url(#tailgrad)"/>
+    <defs>
+      <linearGradient id="tailgrad" x1="20" y1="10" x2="90" y2="80" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#e6c37a"/>
+        <stop offset="0.5" stop-color="#ff9bb0"/>
+        <stop offset="1" stop-color="#a7ead6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <div class="couple-names">Tasya Shafira Amanda</div>
+  <div class="amp">&amp;</div>
+  <div class="couple-names">Dafit Saputra</div>
+  <div class="cover-date">Sabtu, 22 Agustus 2026 · Kota Padang</div>
+  <div class="scroll-hint">gulir untuk membuka undangan ↓</div>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,8 1440,40 L1440,80 L0,80 Z" fill="#0c3247"/>
+</svg>
+
+<!-- QUOTE -->
+<section>
+  <p class="quote-text">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."</p>
+  <span class="quote-source">QS. Ar-Rum: 21</span>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,48 C240,0 480,80 720,40 C960,0 1200,56 1440,24 L1440,80 L0,80 Z" fill="rgba(19,107,107,0.25)"/>
+</svg>
+
+<!-- MEMPELAI -->
+<section>
+  <div class="section-heading">Mempelai</div>
+  <div class="couples">
+    <div class="couple-card">
+      <span class="couple-icon">🐚</span>
+      <h3>Tasya Shafira Amanda</h3>
+      <p>Putri dari<br>Bapak Bayu Widodo &amp; Ibu Endrawati</p>
+    </div>
+    <div class="and-divider">&amp;</div>
+    <div class="couple-card">
+      <span class="couple-icon">⚓</span>
+      <h3>Dafit Saputra</h3>
+      <p>Putra dari<br>Bapak Ngadri &amp; Ibu Ngatini</p>
+    </div>
+  </div>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Hari</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Jam</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Menit</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Detik</span></div>
+  </div>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,8 1440,40 L1440,80 L0,80 Z" fill="#0c3247"/>
+</svg>
+
+<!-- EVENTS -->
+<section>
+  <div class="section-heading">Rangkaian Acara</div>
+  <div class="events">
+    <div class="event-card">
+      <span class="icon">💍</span>
+      <h3>Akad Nikah</h3>
+      <span class="label">Tanggal</span>
+      <p>Jumat, 21 Agustus 2026</p>
+      <span class="label">Waktu</span>
+      <p>08.00 WIB – selesai</p>
+      <span class="label">Lokasi</span>
+      <p>Masjid Rahmatan Lil'alamiin Kampus UPI YPTK</p>
+      <a class="map-link" href="https://maps.app.goo.gl/ma4aNCQfKvkgqaD9A" target="_blank" rel="noopener">Lihat lokasi di peta →</a>
+    </div>
+    <div class="event-card">
+      <span class="icon">🌊</span>
+      <h3>Resepsi</h3>
+      <span class="label">Tanggal</span>
+      <p>Sabtu, 22 Agustus 2026</p>
+      <span class="label">Waktu</span>
+      <p>11.00 AM – 12.00 PM</p>
+      <span class="label">Lokasi</span>
+      <p>Hotel Pangeran Beach, Jl. Ir. H. Juanda No.79, Flamboyan Baru, Kec. Padang Bar., Kota Padang, Sumatera Barat 25115</p>
+      <a class="map-link" href="https://maps.app.goo.gl/eVGMMD9gketo1g9V6" target="_blank" rel="noopener">Lihat lokasi di peta →</a>
+    </div>
+  </div>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,48 C240,0 480,80 720,40 C960,0 1200,56 1440,24 L1440,80 L0,80 Z" fill="rgba(19,107,107,0.25)"/>
+</svg>
+
+<!-- GIFT -->
+<section>
+  <div class="section-heading">Tanda Kasih</div>
+  <div class="gift-box">
+    <p>Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun jika ingin memberi tanda kasih, kami menyediakan amplop digital berikut.</p>
+    <div class="gift-detail">
+      <span>Bank BCA</span>
+      <span>032-277-7637 a.n Dafit Saputra</span>
+    </div>
+    <div class="gift-detail">
+      <span>Bank BNI</span>
+      <span>189-622-8553 a.n Tasya Shafira Amanda</span>
+    </div>
+    <button class="copy-btn" id="copyBtn">Salin nomor rekening</button>
+  </div>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,8 1440,40 L1440,80 L0,80 Z" fill="#0c3247"/>
+</svg>
+
+<!-- RSVP -->
+<section>
+  <div class="section-heading">Konfirmasi Kehadiran</div>
+  <form class="rsvp-form" id="rsvpForm">
+    <div>
+      <label for="rsvp-name">Nama</label>
+      <input type="text" id="rsvp-name" placeholder="Nama lengkap" required>
+    </div>
+    <div>
+      <label for="rsvp-status">Kehadiran</label>
+      <select id="rsvp-status">
+        <option>Hadir</option>
+        <option>Tidak dapat hadir</option>
+        <option>Masih ragu</option>
+      </select>
+    </div>
+    <div>
+      <label for="rsvp-count">Jumlah Tamu</label>
+      <input type="number" id="rsvp-count" min="1" value="1">
+    </div>
+    <div>
+      <label for="rsvp-msg">Ucapan &amp; Doa</label>
+      <textarea id="rsvp-msg" placeholder="Tuliskan ucapan dan doa terbaikmu untuk Tasya &amp; Dafit"></textarea>
+    </div>
+    <button type="submit" class="rsvp-submit">Kirim Konfirmasi</button>
+    <div class="rsvp-note" id="rsvpNote"></div>
+  </form>
+</section>
+
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none">
+  <path d="M0,48 C240,0 480,80 720,40 C960,0 1200,56 1440,24 L1440,80 L0,80 Z" fill="rgba(19,107,107,0.25)"/>
+</svg>
+
+<!-- CLOSING -->
+<section>
+  <p class="closing-text">Bagai dua arus yang akhirnya bertemu di satu lautan yang sama, kami ingin merayakan hari bahagia ini bersama orang-orang terkasih. Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+  <div class="closing-names">Tasya &amp; Dafit</div>
+</section>
+
+<footer>
+  dengan penuh cinta, kami menantikan kehadiranmu 🐚🌊
+</footer>
+
+<script>
+  // bubbles
+  const bubbleContainer = document.getElementById('bubbles');
+  for(let i=0; i<24; i++){
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = Math.random()*16 + 6;
+    b.style.width = size + 'px';
+    b.style.height = size + 'px';
+    b.style.left = Math.random()*100 + '%';
+    const duration = Math.random()*10 + 10;
+    b.style.animationDuration = duration + 's';
+    b.style.animationDelay = (Math.random()*duration) + 's';
+    bubbleContainer.appendChild(b);
+  }
+
+  // countdown — ganti tanggal di bawah sesuai tanggal akad
+  const weddingDate = new Date('2026-08-22T08:00:00+07:00').getTime();
+  function updateCountdown(){
+    const now = new Date().getTime();
+    const dist = weddingDate - now;
+    if(dist < 0){
+      document.getElementById('countdown').innerHTML = '<div class="cd-box"><span class="cd-num">💍</span><span class="cd-label">Hari Bahagia</span></div>';
+      return;
+    }
+    const days = Math.floor(dist / (1000*60*60*24));
+    const hours = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+    const mins = Math.floor((dist % (1000*60*60)) / (1000*60));
+    const secs = Math.floor((dist % (1000*60)) / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // copy rekening
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = 'BCA 032-277-7637 a.n Dafit Saputra / BNI 189-622-8553 a.n Tasya Shafira Amanda';
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const original = btn.textContent;
+      btn.textContent = 'Tersalin ✓';
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  });
+
+  // rsvp form (tampilan saja, belum terhubung ke server)
+  document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('rsvp-name').value || 'Tamu';
+    document.getElementById('rsvpNote').textContent = `Terima kasih, ${name}! Konfirmasimu sudah kami catat 🐚`;
+    e.target.reset();
+  });
+
+  // background music toggle
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  let isPlaying = false;
+
+  function setPlayIcon(){
+    document.getElementById('musicIcon').innerHTML = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>';
+  }
+  function setPauseIcon(){
+    document.getElementById('musicIcon').innerHTML = '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+  }
+
+  musicToggle.addEventListener('click', () => {
+    if(isPlaying){
+      bgMusic.pause();
+      musicToggle.classList.remove('spinning');
+      setPlayIcon();
+    } else {
+      bgMusic.play().catch(() => {
+        // File musik belum tersedia / diblok autoplay browser
+        console.log('Tidak dapat memutar musik. Pastikan file musik.mp3 sudah tersedia.');
+      });
+      musicToggle.classList.add('spinning');
+      setPauseIcon();
+    }
+    isPlaying = !isPlaying;
+  });
+
+  // coba autoplay pelan saat halaman dibuka (banyak browser akan memblokir sampai user berinteraksi)
+  window.addEventListener('load', () => {
+    bgMusic.volume = 0.5;
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      musicToggle.classList.add('spinning');
+      setPauseIcon();
+    }).catch(() => {
+      // Autoplay diblokir, tombol musik tetap tersedia untuk diklik manual
+    });
+  });
+</script>
+
+</body>
+</html>
